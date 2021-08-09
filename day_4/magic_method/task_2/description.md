@@ -9,6 +9,6 @@
 
 При инстанцировании часы установлены в значение 00:00.
 
-> my_clock = MathClock()
-> my_clock * 5
+> my_clock = MathClock()\
+> my_clock * 5\
 > my_clock.get_time()  # '05:00'

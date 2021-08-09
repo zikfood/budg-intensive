@@ -1,40 +1,38 @@
 import unittest
 
 from day_2.builtin_functions.task_1.implementation import (
-    Hundred,
-    Thousand,
-    Million,
+    Value,
+)
+from day_2.common import (
+    MyException,
 )
 
 
 class MyTestCase(unittest.TestCase):
-    def test_on_hundred(self):
-        obj_value = Hundred(7)
-        self.assertEqual(obj_value.get_value(), 700)
+    def test_on_addition(self):
+        seven = Value(7)
+        self.assertEqual(seven + 3, 10)
+        self.assertEqual(seven + 4, 11)
 
-    def test_on_thousand(self):
-        obj_value = Thousand(3)
-        self.assertEqual(obj_value.get_value(), 3000)
+    def test_on_subtraction(self):
+        ten = Value(10)
+        self.assertEqual(ten - 3, 7)
+        self.assertEqual(ten - 10, 0)
 
-    def test_on_million(self):
-        obj_value = Million(1)
-        self.assertEqual(obj_value.get_value(), 1000000)
+    def test_on_multiplication(self):
+        seven = Value(7)
+        self.assertEqual(seven * 3, 21)
+        self.assertEqual(seven * (-1), -7)
+        self.assertEqual(seven * 0, 0)
+        zero = Value(0)
+        self.assertEqual(zero * 3, 0)
 
-    def test_on_arithmetic(self):
-        obj_million = Million(1)
-        obj_thousand = Thousand(1)
-        obj_hundred = Hundred(1)
-        res = obj_million - (obj_thousand * obj_hundred)
-        self.assertEqual(res.get_value(), 900000)
-
-    def test_on_all_arithmetic(self):
-        a = Hundred(333)
-        b = Thousand(44)
-        c = Million(5)
-        a += b * c
-        c -= b / a
-        res = a + b + c
-        self.assertGreater(res.get_value(), 220005077299)
+    def test_on_division(self):
+        ten = Value(10)
+        self.assertEqual(ten / 2, 5)
+        self.assertEqual(ten / 4, 2.5)
+        x = lambda: ten / 0
+        self.assertRaises(MyException, x)
 
 
 if __name__ == '__main__':
