@@ -12,7 +12,9 @@ def get_days_count_by_month(month):
 
     for item in dict.keys(months):
         if item == month:
-            return months[month]
+            result = months[month]
+            break
     else:
-        return 0
+        result = 0
 
+    return result
