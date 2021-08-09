@@ -6,4 +6,13 @@ def get_days_count_by_month(month):
 
     Returns: количество дней
     """
-    raise NotImplementedError
+    months = {
+        "январь": 31, "февраль": 29, "март": 31, "апрель": 30, "май": 31, "июнь": 30,
+        "июль": 31, "август": 31, "сентябрь": 30, "октябрь": 31, "ноябрь": 30, "декабрь": 31}
+
+    for item in dict.keys(months):
+        if item == month:
+            return months[month]
+    else:
+        return 0
+

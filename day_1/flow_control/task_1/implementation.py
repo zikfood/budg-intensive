@@ -1,6 +1,7 @@
-def get_numbers():
-    """Возвращает все числа от 1000 до 2000, которые делятся на 7, но не кратны 5
+def get_numbers(min_num=1000, max_num=2000):
 
-    Returns: итерируемый объект с нужными числами
-    """
-    raise NotImplementedError
+    numbers = []
+    for num in range(min_num, max_num + 1):
+        if (num % 7 == 0) and (num % 5 != 0):
+            numbers.append(num)
+    return numbers
