@@ -1,14 +1,15 @@
 """
 Что будет выведено после выполнения кода? Почему?
 """
-x = 42
+def print_msg(number):
+
+    def printer():
+        nonlocal number
+        number=3
+        print(number)
+
+    printer()
+    print(number)
 
 
-def some_func():
-    global x
-    x = x + 1
-    print(x)
-
-
-some_func()
-print(x)
+print_msg(9)
