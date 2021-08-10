@@ -1,9 +1,12 @@
-def counter():
-    """
-    Обертка для подсчёта количества вызовов обернутой функции.
+import functools
 
-    Returns:
-        int - количество вызовов функции.
-    """
 
-    raise NotImplementedError
+def counter(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        wrapper.count += 1
+        func(*args, **kwargs)
+        return wrapper.count
+    wrapper.count = 0
+    return wrapper
+
