@@ -9,6 +9,9 @@ class Tuple:
     def __getitem__(self, item):
         return self.values[item]
 
+    def __str__(self):
+        return str(self.values)
+
     def count(self, value):
         """
         Возвращает число раз появления value в объекте
@@ -27,14 +30,9 @@ class Tuple:
         Args:
             value: Элемент индекс которого ищется в объекте
         """
-        if value > len(self.values):
+        if value not in self.values:
             raise ValueError
 
-        value_index = 0
-        try:
-            for item in self.values:
-                if item == value:
-                    return value_index
-                value_index += 1
-        except:
-            raise ValueError
+        for count, item in enumerate(self.values):
+            if item == value:
+                return count
