@@ -4,7 +4,7 @@ class Tuple:
     При создание принимается последовательность объектов
     """
     def __init__(self, *args):
-        self.values = [i for i in args]
+        self.values = args
 
     def __getitem__(self, item):
         return self.values[item]
