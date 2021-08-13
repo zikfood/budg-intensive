@@ -2,7 +2,13 @@ def return_errors(filename):
     """
     Функция, которая возвращает строки из лога со словом error
     """
-    raise NotImplementedError
+    error_line = "ERROR"
+    with open(filename) as file:
+        for line in file:
+            if error_line in line:
+                yield line
 
 
-return_errors('log.txt')
+x = return_errors('log.txt')
+
+

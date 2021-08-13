@@ -3,4 +3,7 @@ def fib(n):
     """
     Функция, которая возвращает n-ое число последовательности Фибоначчи
     """
-    raise NotImplementedError
+    a = b = 1
+    for i in range(n):
+        yield a
+        a, b = b, a + b
