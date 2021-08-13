@@ -11,13 +11,9 @@ class MathClock:
         self.mins = self.mins % 60
 
     def __sub__(self, other):
-        self.mins -= other
-        if self.mins < 0:
-            delt = (-1 * self.mins) // 60 + 1
-            self.hours = self.hours - delt
-            self.mins = (60 + self.mins) % 60
-        if self.hours < 0:
-            self.hours = (24 + self.hours) % 24
+        hours_to_add, mins_to_add = divmod(self.mins - other, 60)
+        self.mins = mins_to_add
+        self.hours = (self.hours + hours_to_add) % 24
 
     def __mul__(self, other):
         self.hours = (self.hours + other) % 24
