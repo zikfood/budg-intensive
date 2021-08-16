@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Manager
+from django.db.models import Manager, Q
 
 
 class WorkerManager(models.Manager):
@@ -10,8 +10,8 @@ class WorkerManager(models.Manager):
         """
         Переопределенный кверисет с фильтрацией сотрудников с заданной датой принятия на работу и с не пустым табельным номером отличным от 0
         """
-
-        raise NotImplementedError
+        return super().get_queryset().exclude(
+            Q(startwork_date__isnull=True) | Q(tab_num__iexact=0) | Q(tab_num__isnull=True))
 
 
     def get_workers_info(self):
@@ -22,8 +22,14 @@ class WorkerManager(models.Manager):
         Каждая строка должна быть в формате вида: Васильев Василий, 888, Подразделение №1
         """
 
-        raise NotImplementedError
+        queryset = super().get_queryset().values_list(
+            'last_name',
+            'first_name',
+            'tab_num',
+            'department__name'
+        ).order_by('last_name', 'first_name')
 
+        return list(queryset)
 
 class Department(models.Model):
     name = models.CharField('Наименование', max_length=30)
@@ -33,14 +39,14 @@ class Department(models.Model):
         """
         Количество активных сотрудников подразделения
         """
-        raise NotImplementedError
+        return Worker.objects.filter(department=self).count()
 
     @property
     def get_all_worker_count(self):
         """
         Количество всех сотрудников подразделения
         """
-        raise NotImplementedError
+        return Worker.objects_all.filter(department=self).count()
 
     class Meta:
         db_table = 'department'
@@ -63,4 +69,3 @@ class Worker(models.Model):
     class Meta:
         db_table = 'workers'
         verbose_name = 'Сотрудник'
-
