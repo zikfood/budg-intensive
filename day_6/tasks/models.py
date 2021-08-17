@@ -11,7 +11,7 @@ class WorkerManager(models.Manager):
         Переопределенный кверисет с фильтрацией сотрудников с заданной датой принятия на работу и с не пустым табельным номером отличным от 0
         """
         return super().get_queryset().exclude(
-            Q(startwork_date__isnull=True) | Q(tab_num__iexact=0) | Q(tab_num__isnull=True))
+            Q(startwork_date__isnull=True) | Q(tab_num__iexact=0))
 
 
     def get_workers_info(self):
@@ -20,16 +20,20 @@ class WorkerManager(models.Manager):
         фамилия, имя, табельный номер сотрудника а также название подразделения в котором числится
         Строки упорядочены по фамилии и имени сотрудника.
         Каждая строка должна быть в формате вида: Васильев Василий, 888, Подразделение №1
-        """
 
+"""
         queryset = super().get_queryset().values_list(
-            'last_name',
             'first_name',
+            'last_name',
             'tab_num',
             'department__name'
         ).order_by('last_name', 'first_name')
+        result_list = []
+        for attribute in queryset:
+            result_list.append(f"{attribute[0]} {attribute[1]}, {attribute[2]}, {attribute[3]}")
 
-        return list(queryset)
+        return result_list
+
 
 class Department(models.Model):
     name = models.CharField('Наименование', max_length=30)
