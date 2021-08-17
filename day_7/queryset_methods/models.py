@@ -67,7 +67,7 @@ class OrderItem(models.Model):
     """
     order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name='Заказ')
     product = models.ForeignKey('Product', on_delete=models.PROTECT, verbose_name='Товар')
-    count = models.DecimalField(verbose_name='Количество')
+    count = models.DecimalField(verbose_name='Количество', max_digits=6, decimal_places=2)
 
     class Meta:
         db_table = 'order_item'
