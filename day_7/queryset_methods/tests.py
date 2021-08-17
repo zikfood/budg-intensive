@@ -153,7 +153,7 @@ class BaseTest(TestCase):
 
         order_1 = Order.objects.create(
             number='1',
-            date_=date(2021, 1, 1),
+            date_formation=date(2021, 1, 1),
             customer=ivan,
         )
         OrderItem.objects.bulk_create([
@@ -176,7 +176,7 @@ class BaseTest(TestCase):
 
         order_2 = Order.objects.create(
             number='2',
-            date_=date(2021, 1, 10),
+            date_formation=date(2021, 1, 10),
             customer=oleg,
         )
         OrderItem.objects.bulk_create([
@@ -194,7 +194,7 @@ class BaseTest(TestCase):
 
         order_3 = Order.objects.create(
             number='3',
-            date_=date(2021, 1, 15),
+            date_formation=date(2021, 1, 15),
             customer=pavel,
         )
         OrderItem.objects.bulk_create([
@@ -212,7 +212,7 @@ class BaseTest(TestCase):
 
         order_4 = Order.objects.create(
             number='4',
-            date_=date(2021, 1, 15),
+            date_formation=date(2021, 1, 15),
             customer=ivan,
         )
         OrderItem.objects.bulk_create([
@@ -230,7 +230,7 @@ class BaseTest(TestCase):
 
         order_5 = Order.objects.create(
             number='5',
-            date_=date(2021, 2, 7),
+            date_formation=date(2021, 2, 7),
             customer=oleg,
         )
         OrderItem.objects.bulk_create([
@@ -248,7 +248,7 @@ class BaseTest(TestCase):
 
         order_6 = Order.objects.create(
             number='6',
-            date_=date(2021, 2, 19),
+            date_formation=date(2021, 2, 19),
             customer=ivan,
         )
         OrderItem.objects.bulk_create([
@@ -261,7 +261,7 @@ class BaseTest(TestCase):
 
         order_7 = Order.objects.create(
             number='7',
-            date_=date(2021, 3, 1),
+            date_formation=date(2021, 3, 1),
             customer=pavel,
         )
         OrderItem.objects.bulk_create([

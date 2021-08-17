@@ -54,7 +54,7 @@ class Order(models.Model):
     Заказ
     """
     number = models.CharField('Номер', max_length=50)
-    date_ = models.DateField('Дата')
+    date_formation = models.DateField('Дата')
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE, verbose_name='Покупатель')
 
     class Meta:
