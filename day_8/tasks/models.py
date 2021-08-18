@@ -13,7 +13,7 @@ class WorkerManager(models.Manager):
         return super().get_queryset().filter(director__isnull=True)
 
 class Office(models.Model):
-    
+
     address = models.TextField('Адрес')
     mail = models.CharField('Адрес почты', max_length=30, )
 
@@ -97,6 +97,7 @@ class OrderedWorker(Worker):
 
     class Meta:
         ordering = ['first_name', 'startwork_date']
+        proxy = True
 
 
 class Director(Worker):
@@ -104,6 +105,7 @@ class Director(Worker):
     Директор
     """
     # что здесь не хватает?
+    objects = models.Manager()
     grade = models.IntegerField('Оценка', default=1)
 
     class Meta:
