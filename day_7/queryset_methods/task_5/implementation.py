@@ -1,3 +1,8 @@
+from django.db.models import Avg, F, IntegerField
+
+from day_7.queryset_methods.models import OrderItem
+
+
 def get_average_cost_without_product(product, begin, end):
     """Возвращает среднюю стоимость заказов без указанного товара за определенный промежуток времени
 
@@ -8,4 +13,9 @@ def get_average_cost_without_product(product, begin, end):
 
     Returns: возвращает числовое значение средней стоимости
     """
-    raise NotImplementedError
+    result = OrderItem.objects\
+        .filter(order__date_formation__range=(begin, end)) \
+        .exclude(product__name__exact=product) \
+        .aggregate(avg_order_cost=Avg(F('product__productcost__value') * F('count'), output_field=IntegerField()))['avg_order_cost']
+
+    return result
