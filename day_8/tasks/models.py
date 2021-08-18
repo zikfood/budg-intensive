@@ -104,7 +104,6 @@ class Director(Worker):
     """
     Директор
     """
-    # что здесь не хватает?
     objects = models.Manager()
     grade = models.IntegerField('Оценка', default=1)
 
