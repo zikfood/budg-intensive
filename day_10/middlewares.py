@@ -1,20 +1,32 @@
+import time
+
 from django.utils.deprecation import MiddlewareMixin
 
 
 class FakeUser:
 
-    # определите у пользователя аттрибуты auth
-    pass
+    def __init__(self, auth=False):
+        self.auth = auth
 
 
-# Необходимо изменить поведение указанных методов.
-# Помните про __call__()
 class MyMiddleware(MiddlewareMixin):
 
+    VALID_TOKEN = 'VALID_TOKEN'
+    INVALID_TOKEN = 'INVALID_TOKEN'
+    request_start_time = 0
+
     def process_request(self, request):
+        if request.auth == self.VALID_TOKEN:
+            request.auth = True
+        elif request.auth == self.INVALID_TOKEN:
+            request.auth = False
+
+        self.request_start_time = time.time()
+        time.sleep(1)
 
         return self.get_response(request)
 
     def process_response(self, request, response):
-
+        request_runtime = time.time() - self.request_start_time
+        request.runtime = request_runtime
         return response
