@@ -30,3 +30,10 @@ class MyMiddleware(MiddlewareMixin):
         request_runtime = time.time() - self.request_start_time
         request.runtime = request_runtime
         return response
+
+
+'''
+AuthenticationMiddleware - Связывает пользователей, использующих сессии, запросами.
+SessionMiddleware - Управление сессиями между запросами. Позволяет сохранять и получать данные посетителя сайта
+CsrfViewMiddleware - включает CSRF защиту. Предотвращает подделку запроса с помощью проверки наличия CSRF токена
+'''
