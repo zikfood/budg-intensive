@@ -16,10 +16,13 @@ class MyMiddleware(MiddlewareMixin):
     request_start_time = 0
 
     def process_request(self, request):
+        user = FakeUser()
         if request.auth == self.VALID_TOKEN:
             request.auth = True
+            user.auth = True
         elif request.auth == self.INVALID_TOKEN:
             request.auth = False
+            user.auth = False
 
         self.request_start_time = time.time()
         time.sleep(1)
